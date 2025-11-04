@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNB Solution Hub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            /* Brand Mandatories Palette */
+            --dark-blue: #150065;
+            --bright-turquoise: #00ffc9;
+            --light-purple: #aa61ff;
+            --calid-orange: #FF487c;
+            --white: #ffffff;
+            
+            /* Fonts */
+            --font-title: 'Baloo 2', cursive;
+            --font-body: 'Open Sans', sans-serif;
+            
+            /* UI */
+            --bg-color: #f0f2f5; /* A very light grey background */
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 25px rgba(21, 0, 101, 0.15);
+        }
+
+        /* --- Base & Animation --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            margin: 0;
+            background-color: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header --- */
+        header {
+            background: var(--dark-blue);
+            padding: 20px 40px;
+            background-image: linear-gradient(135deg, var(--dark-blue) 70%, var(--light-purple));
+            /* Added relative positioning to place the logo circle */
+            position: relative;
+            min-height: 90px; /* Increased height to fit circle */
+            display: flex;
+            align-items: center;
+        }
+
+        /* === NEW: Logo Circle & Image === */
+        .logo-container {
+            width: 140px; /* Circle diameter */
+            height: 140px; /* Circle diameter */
+            background-color: var(--white);
+            border-radius: 50%; /* Makes it a circle */
+            
+            /* Positioning: Sits on top of the header */
+            position: absolute;
+            top: 20px; /* Adjust this to move circle up/down */
+            left: 40px; /* Aligns with container padding */
+            
+            /* Shadow for depth */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            
+            /* Flexbox to center the logo inside */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 85px; /* Size of the logo inside the circle */
+            height: auto;
+        }
+        /* ================================ */
+
+
+        /* --- Welcome Hero --- */
+        .hero {
+            padding: 40px 0;
+            text-align: left;
+            /* Added padding-top to clear the new logo circle */
+            margin-top: 80px; 
+        }
+
+        .hero h2 {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 3em; /* 24pt+ */
+            color: var(--dark-blue);
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #555;
+            max-width: 700px;
+        }
+
+        /* --- Main Content Grid --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr; /* 1 column on mobile */
+            gap: 40px;
+        }
+
+        @media (min-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .content-section h3 {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 2.1em; /* 21pt */
+            color: var(--dark-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--light-purple);
+            padding-bottom: 10px;
+        }
+        
+        /* --- New Card Design --- */
+        .card-list {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            display: block;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            padding: 25px;
+            animation: fadeIn 0.5s ease-out both;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--bright-turquoise);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .card-icon {
+            font-size: 2em;
+            color: var(--light-purple);
+            width: 40px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-family: var(--font-body);
+            font-weight: 700; /* Bold */
+            font-size: 1.2em; /* 12pt+ */
+            color: var(--dark-blue);
+            margin: 0;
+        }
+
+        .card-arrow {
+            margin-left: auto;
+            font-size: 1.3em;
+            color: var(--light-purple);
+            opacity: 0.6;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .card:hover .card-arrow {
+            transform: translateX(5px);
+            opacity: 1.0;
+            color: var(--calid-orange);
+        }
+
+        .card.coming-soon {
+            background-color: #f9f9f9;
+            opacity: 0.7;
+        }
+        
+        .card.coming-soon .card-title {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .card.coming-soon:hover {
+            transform: none;
+            box-shadow: var(--card-shadow);
+            border-color: transparent;
+        }
+        
+        .card.coming-soon .card-arrow {
+            display: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            background-color: var(--dark-blue);
+            color: var(--white);
+        }
+
+        footer .slogan {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 1.6em;
+            color: var(--bright-turquoise);
+            margin: 0 0 10px 0;
+            text-transform: lowercase;
+        }
+
+        footer .copyright {
+            font-size: 0.9em;
+            color: var(--white);
+            opacity: 0.7;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://www.bnetbuilders.com/wp-content/themes/theme/_/img/logo.svg" alt="BNB Logo" class="logo-img">
+        </div>
+
+        <div class="container">
+            </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <h2>BNB Solution Hub</h2>
+            <p>Welcome. Explore our internal business cases and public Workday Marketplace applications.</p>
+        </section>
+
+        <div class="main-content">
+
+            <section class="content-section">
+                <h3>Business Cases</h3>
+                <div class="card-list">
+
+                    <a href="Goal_Assistant_v1.html" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-bullseye card-icon"></i>
+                            <h4 class="card-title">Goal Assistant v1</h4>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </a>
+
+                    <a href="Candidate_PreScreening_v1.html" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-user-check card-icon"></i>
+                            <h4 class="card-title">Candidate Pre-Screening v1</h4>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </a>
+
+                    <a href="Attrition_Insights_v1.html" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-chart-line card-icon"></i>
+                            <h4 class="card-title">Attrition Insights v1</h4>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h3>Workday Marketplace Apps</h3>
+                <div class="card-list">
+
+                    <a href="https://marketplace.workday.com/apps/458141/goal-assistant" target="_blank" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-store card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">Goal Assistant</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+
+                    <a href="https://marketplace.workday.com/apps/529582/attrition-insights" target="_blank" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-store card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">Attrition Insights</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://marketplace.workday.com/apps/490233/daytrack-for-projects" target="_blank" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-tasks card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">DayTrack for Projects</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://marketplace.workday.com/apps/570633/invoice-factoring-automation" target="_blank" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-file-invoice-dollar card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">Invoice Factoring Automation</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://marketplace.workday.com/apps/497653/intercompany-invoice-automation" target="_blank" class="card">
+                        <div class="card-content">
+                            <i class="fas fa-file-invoice-dollar card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">Intercompany Invoice Automation</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+                    
+                    <a href="https://marketplace.workday.com/apps/497655/vat-accruals-automation" target="_blank" class="card">
+                        <div class="card-content">
+            <i class="fas fa-file-invoice-dollar card-icon" style="color: var(--calid-orange);"></i>
+                            <h4 class="card-title">VAT Accruals Automation</h4>
+                            <i class="fas fa-external-link-alt card-arrow"></i>
+                        </div>
+                    </a>
+                    
+                    <div class="card coming-soon">
+                        <div class="card-content">
+                            <i class="fas fa-clock card-icon"></i>
+                            <h4 class="card-title">Training Lifecycle Manager (Coming Soon)</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="slogan">think human work digital</p>
+            <p class="copyright">&copy; 2025 BNB. All rights reserved. | Proprietary & Confidential</p>
+        </div>
+    </footer>
+
+</body>
+</html>
